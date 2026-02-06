@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wycena Online | Stolarstwo Premium Nowak | Darmowa Wycena Krak車w</title>
+    <meta name="description" content="Darmowa wycena mebli na wymiar online w Krakowie. Wype?nij formularz, a my przygotujemy szacunkowy koszt w ci?gu 24h. Tel: 512 345 678">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #3d2817;
+            --primary-light: #8b5a2b;
+            --accent: #d4af37;
+            --dark: #1a1a1a;
+            --light: #f9f7f4;
+            --white: #ffffff;
+            --gray: #666;
+            --success: #28a745;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Lato', sans-serif; background: var(--light); color: var(--dark); }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        .nav-menu a:hover::after { width: 100%; }
+        
+        .nav-cta {
+            background: var(--accent);
+            color: var(--primary) !important;
+            padding: 0.7rem 1.5rem !important;
+            border-radius: 30px;
+            font-weight: 700 !important;
+        }
+        
+        .page-header {
+            height: 45vh;
+            background: linear-gradient(rgba(61, 40, 23, 0.8), rgba(61, 40, 23, 0.9)),
+                        url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 80px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .quote-section {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .quote-container {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .form-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .form-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: 0;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-number {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step.active .step-number, .step.completed .step-number {
+            background: var(--accent);
+            color: var(--primary);
+        }
+        
+        .step-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .step.active .step-label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .form-step h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .radio-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .radio-card:hover {
+            border-color: var(--accent);
+        }
+        
+        .radio-card.selected {
+            border-color: var(--accent);
+            background: rgba(212, 175, 55, 0.1);
+        }
+        
+        .radio-card i {
+            font-size: 1.8rem;
+            color: var(--primary-light);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .radio-card.selected i {
+            color: var(--accent);
+        }
+        
+        .radio-card div {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .radio-card input {
+            display: none;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Lato', sans-serif;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .btn {
+            padding: 0.9rem 1.8rem;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #666;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .summary-box {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .summary-box h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.9rem;
+        }
+        
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 0.5rem;
+            padding-top: 0.8rem;
+            border-top: 2px solid var(--accent);
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .success-message.active {
+            display: block;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .success-message h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .success-message p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-section {
+            background: var(--primary);
+            color: var(--white);
+            padding: 4rem 2rem;
+        }
+        
+        .info-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .info-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-card p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .radio-group { grid-template-columns: repeat(2, 1fr); }
+            .form-row { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 2rem; }
+            .quote-container { padding: 1.5rem; }
+            .nav-menu { display: none; }
+            .step-label { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">??</div>
+                <span>Premium Nowak</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Strona G?車wna</a></li>
+                <li><a href="o-nas.html">O Nas</a></li>
+                <li><a href="realizacje.html">Realizacje</a></li>
+                <li><a href="wycena.html">Wycena Online</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+                <li><a href="wycena.html" class="nav-cta">Darmowa Wycena</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div data-aos="fade-up">
+            <h1>Darmowa Wycena Online</h1>
+            <p>Wype?nij formularz, a my przygotujemy szacunkowy koszt w ci?gu 24h</p>
+        </div>
+    </header>
+
+    <section class="quote-section">
+        <div class="quote-container" data-aos="fade-up">
+            <div class="form-steps">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Typ mebla</div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Szczeg車?y</div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Kontakt</div>
+                </div>
+            </div>
+
+            <div class="form-step active" id="step1">
+                <h2>Jaki mebel Ci? interesuje?</h2>
+                <div class="radio-group">
+                    <label class="radio-card" onclick="selectType(this, 'kuchnia')">
+                        <input type="radio" name="type" value="kuchnia">
+                        <i class="fas fa-utensils"></i>
+                        <div>Kuchnia na wymiar</div>
+                    </label>
+                    <label class="radio-card" onclick="selectType(this, 'szafy')">
+                        <input type="radio" name="type" value="szafy">
+                        <i class="fas fa-tshirt"></i>
+                        <div>Szafa / Garderoba</div>
+                    </label>
+                    <label class="radio-card" onclick="selectType(this, 'schody')">
+                        <input type="radio" name="type" value="schody">
+                        <i class="fas fa-shoe-prints"></i>
+                        <div>Schody drewniane</div>
+                    </label>
+                    <label class="radio-card" onclick="selectType(this, 'meble')">
+                        <input type="radio" name="type" value="meble">
+                        <i class="fas fa-couch"></i>
+                        <div>Meble (st車?, komoda)</div>
+                    </label>
+                    <label class="radio-card" onclick="selectType(this, 'biuro')">
+                        <input type="radio" name="type" value="biuro">
+                        <i class="fas fa-briefcase"></i>
+                        <div>Meble biurowe</div>
+                    </label>
+                    <label class="radio-card" onclick="selectType(this, 'inne')">
+                        <input type="radio" name="type" value="inne">
+                        <i class="fas fa-question"></i>
+                        <div>Inne / nietypowe</div>
+                    </label>
+                </div>
+                <div class="form-navigation">
+                    <div></div>
+                    <button class="btn btn-primary" onclick="nextStep(2)" id="btn-step1" disabled>Dalej <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="form-step" id="step2">
+                <h2>Szczeg車?y projektu</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Wymiary przybli?one</label>
+                        <input type="text" placeholder="np. 300x60x240 cm" id="dimensions">
+                    </div>
+                    <div class="form-group">
+                        <label>Rodzaj drewna</label>
+                        <select id="wood">
+                            <option value="">Wybierz...</option>
+                            <option value="dab">D?b</option>
+                            <option value="jesion">Jesion</option>
+                            <option value="orzech">Orzech</option>
+                            <option value="sosna">Sosna</option>
+                            <option value="inne">Inne / nie wiem</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Opis projektu *</label>
+                    <textarea rows="4" placeholder="Opisz czego potrzebujesz - styl, kolorystyka, szczeg車lne wymagania..." id="description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Za??cz zdj?cia inspiracji (opcjonalnie)</label>
+                    <input type="file" multiple accept="image/*" style="padding: 0.5rem;">
+                </div>
+                <div class="form-navigation">
+                    <button class="btn btn-secondary" onclick="prevStep(1)"><i class="fas fa-arrow-left"></i> Wstecz</button>
+                    <button class="btn btn-primary" onclick="nextStep(3)">Dalej <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="form-step" id="step3">
+                <h2>Twoje dane kontaktowe</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Imi? i nazwisko *</label>
+                        <input type="text" required id="name" placeholder="Jan Kowalski">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon *</label>
+                        <input type="tel" required id="phone" placeholder="123 456 789">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email" placeholder="jan@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Lokalizacja (miasto) *</label>
+                        <input type="text" required id="location" placeholder="Krak車w">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Preferowany termin</label>
+                    <select id="deadline">
+                        <option value="">Wybierz...</option>
+                        <option value="asap">Jak najszybciej</option>
+                        <option value="1m">W ci?gu miesi?ca</option>
+                        <option value="3m">W ci?gu 3 miesi?cy</option>
+                        <option value="6m">W ci?gu p車? roku</option>
+                        <option value="flex">Elastyczny</option>
+                    </select>
+                </div>
+                <div class="summary-box">
+                    <h3>Podsumowanie</h3>
+                    <div class="summary-item"><span>Typ mebla:</span><span id="summary-type">-</span></div>
+                    <div class="summary-item"><span>Wymiary:</span><span id="summary-dimensions">-</span></div>
+                    <div class="summary-item"><span>Drewno:</span><span id="summary-wood">-</span></div>
+                    <div class="summary-item"><span>Kontakt:</span><span id="summary-contact">-</span></div>
+                </div>
+                <div class="form-navigation">
+                    <button class="btn btn-secondary" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> Wstecz</button>
+                    <button class="btn btn-primary" onclick="submitForm()"><i class="fas fa-paper-plane"></i> Wy?lij zapytanie</button>
+                </div>
+            </div>
+
+            <div class="success-message" id="success">
+                <div class="success-icon"><i class="fas fa-check"></i></div>
+                <h2>Dzi?kujemy za zg?oszenie!</h2>
+                <p>Twoje zapytanie zosta?o wys?ane. Skontaktujemy si? z Tobem w ci?gu 24 godzin.<br>Tel: 512 345 678 | Email: kontakt@stolarzpremium.pl</p>
+                <a href="index.html" class="btn btn-primary">Wr車? do strony g?車wnej</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-grid">
+            <div class="info-card" data-aos="fade-up" data-aos-delay="0">
+                <i class="fas fa-clock"></i>
+                <h3>Szybka Odpowied?</h3>
+                <p>Wycena w ci?gu 24h. Pilne zlecenia w trybie ekspresowym.</p>
+            </div>
+            <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-ruler-combined"></i>
+                <h3>Darmowy Pomiar</h3>
+                <p>Przyjedziemy, zmierzymy, doradzimy - bez zobowi?za里.</p>
+            </div>
+            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Gwarancja 10 Lat</h3>
+                <p>Na wszystkie meble udzielamy 10-letniej gwarancji.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Stolarstwo Premium Nowak | ul. Drzewna 12, 30-001 Krak車w | Tel: 512 345 678</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+        
+        let formData = { type: '', dimensions: '', wood: '', description: '', name: '', phone: '', email: '', location: '', deadline: '' };
+        
+        function selectType(element, type) {
+            document.querySelectorAll('.radio-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            formData.type = type;
+            document.getElementById('btn-step1').disabled = false;
+        }
+        
+        function nextStep(step) {
+            if (step === 3) {
+                formData.dimensions = document.getElementById('dimensions').value;
+                formData.wood = document.getElementById('wood').value;
+                formData.description = document.getElementById('description').value;
+                updateSummary();
+            }
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+            document.querySelectorAll('.step').forEach((s, index) => {
+                if (index + 1 < step) {
+                    s.classList.add('completed');
+                    s.classList.remove('active');
+                    s.querySelector('.step-number').innerHTML = '<i class="fas fa-check"></i>';
+                } else if (index + 1 === step) {
+                    s.classList.add('active');
+                    s.classList.remove('completed');
+                    s.querySelector('.step-number').textContent = step;
+                } else {
+                    s.classList.remove('active', 'completed');
+                    s.querySelector('.step-number').textContent = index + 1;
+                }
+            });
+        }
+        
+        function prevStep(step) {
+            nextStep(step);
+        }
+        
+        function updateSummary() {
+            const typeNames = { 'kuchnia': 'Kuchnia', 'szafy': 'Szafa/Garderoba', 'schody': 'Schody', 'meble': 'Meble', 'biuro': 'Biuro', 'inne': 'Inne' };
+            const woodNames = { 'dab': 'D?b', 'jesion': 'Jesion', 'orzech': 'Orzech', 'sosna': 'Sosna', 'inne': 'Inne' };
+            document.getElementById('summary-type').textContent = typeNames[formData.type] || '-';
+            document.getElementById('summary-dimensions').textContent = formData.dimensions || '-';
+            document.getElementById('summary-wood').textContent = woodNames[formData.wood] || '-';
+        }
+        
+        document.getElementById('name').addEventListener('input', function() {
+            formData.name = this.value;
+            updateContactSummary();
+        });
+        
+        document.getElementById('phone').addEventListener('input', function() {
+            formData.phone = this.value;
+            updateContactSummary();
+        });
+        
+        function updateContactSummary() {
+            document.getElementById('summary-contact').textContent = (formData.name || formData.phone) ? `${formData.name} (${formData.phone})` : '-';
+        }
+        
+        function submitForm() {
+            document.querySelector('.form-steps').style.display = 'none';
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            document.getElementById('success').classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>'''
+
+print("? WYCENA.HTML - Gotowy!")
+print("   ? 3-krokowy konfigurator")
+print("   ? 6 kategorii mebli")
+print("   ? Podsumowanie w czasie rzeczywistym")
+print("   ? Dane kontaktowe w stopce: 512 345 678")

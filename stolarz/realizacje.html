@@ -1,0 +1,671 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizacje | Stolarstwo Premium Nowak | Galeria Mebli Krak車w</title>
+    <meta name="description" content="Zobacz nasze realizacje w Krakowie: kuchnie, schody, garderoby, meble na wymiar. Ponad 420 zadowolonych klient車w. Tel: 512 345 678">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #3d2817;
+            --primary-light: #8b5a2b;
+            --accent: #d4af37;
+            --dark: #1a1a1a;
+            --light: #f9f7f4;
+            --white: #ffffff;
+            --gray: #666;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Lato', sans-serif; background: var(--light); color: var(--dark); }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        .nav-menu a:hover::after { width: 100%; }
+        
+        .nav-cta {
+            background: var(--accent);
+            color: var(--primary) !important;
+            padding: 0.7rem 1.5rem !important;
+            border-radius: 30px;
+            font-weight: 700 !important;
+        }
+        
+        .page-header {
+            height: 45vh;
+            background: linear-gradient(rgba(61, 40, 23, 0.8), rgba(61, 40, 23, 0.9)),
+                        url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 80px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .filter-section {
+            background: var(--white);
+            padding: 1.5rem;
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .filter-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 0.7rem 1.3rem;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .gallery-section {
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .gallery-item.hidden {
+            display: none;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 30%, rgba(61, 40, 23, 0.95));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-category {
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+        
+        .gallery-title {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .gallery-location {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .gallery-zoom {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 45px;
+            height: 45px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.1rem;
+            transform: scale(0);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-zoom {
+            transform: scale(1);
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .lightbox img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 10px;
+        }
+        
+        .lightbox-info {
+            background: var(--white);
+            padding: 1.2rem;
+            border-radius: 0 0 10px 10px;
+            margin-top: -5px;
+        }
+        
+        .lightbox-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+            font-size: 1.2rem;
+        }
+        
+        .lightbox-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+        
+        .lightbox-prev { left: 1rem; }
+        .lightbox-next { right: 1rem; }
+        
+        .cta-section {
+            background: var(--primary);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            background: var(--accent);
+            color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+            .nav-menu { display: none; }
+            .page-header h1 { font-size: 2rem; }
+            .lightbox-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">??</div>
+                <span>Premium Nowak</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Strona G?車wna</a></li>
+                <li><a href="o-nas.html">O Nas</a></li>
+                <li><a href="realizacje.html">Realizacje</a></li>
+                <li><a href="wycena.html">Wycena Online</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+                <li><a href="wycena.html" class="nav-cta">Darmowa Wycena</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div data-aos="fade-up">
+            <h1>Nasze Realizacje</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Strona G?車wna</a>
+                <span>/</span>
+                <span>Realizacje</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="filter-section">
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">Wszystkie</button>
+            <button class="filter-btn" data-filter="kuchnie">Kuchnie</button>
+            <button class="filter-btn" data-filter="schody">Schody</button>
+            <button class="filter-btn" data-filter="garderoby">Garderoby</button>
+            <button class="filter-btn" data-filter="meble">Meble</button>
+            <button class="filter-btn" data-filter="biura">Biura</button>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="gallery-grid">
+            <!-- KUCHNIE -->
+            <div class="gallery-item" data-category="kuchnie" data-aos="fade-up" data-aos-delay="0">
+                <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800" alt="Kuchnia d?b">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Kuchnia</div>
+                    <h3 class="gallery-title">Kuchnia D?b Naturalny</h3>
+                    <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Krak車w, Pr?dnik, 2024</div>
+                </div>
+                <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+            </div>
+            
+            <div class="gallery-item" data-category="kuchnie" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1484154218962-a1c002085d2f?w=800" alt="Kuchnia nowoczesna">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Kuchnia</div>
+                    <h3 class="gallery-title">Kuchnia Nowoczesna Biel/D?b</h3>
+                    <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Wieliczka, 2024</div>
+                </div>
+                <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+            </div>
+            
+            <div class="gallery-item" data-category="kuchnie" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800" alt="Kuchnia rustykalna">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Kuchnia</div>
+                    <h3 class="gallery-title">Kuchnia Rustykalna</h3>
+                    <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Skawina, 2023</div>
+                </div>
+                <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+            </div>
+            
+            <!-- SCHODY -->
+            <div class="gallery-item" data-category="schody" data-aos="fade-up" data-aos-delay="0">
+                <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=800" alt="Schody kr?cone">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Schody</div>
+                    <h3 class="gallery-title">Schody Kr?cone z D?bu</h3>
+                    <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Krak車w, Podg車rze, 2024</div>
+                </div>
+                <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+            </div>
+            
+            <div class="gallery-item" data-category="schody" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800" alt="Schody proste">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Schody</div>
+                    <h3 class="gallery-title">Schody Proste z Jesionu</h3>
+                    <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Niepo?omice, 2023</div>
+                </div>
+                <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+            </div>
+            
+            <div class="gallery-item" data-category="schody" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800" alt="Schody zabiegowe">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Schody</div>
+                    <h3 class="gallery-title">Schody Zabiegowe Orzech</h3>
+                    <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Krak車w, Bronowice, 2023</div>
+                </div>
+                <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+            </div>
+            
+            <!-- GARDEROBY -->
+            <div class="gallery-item" data-category="garderoby" data-aos="fade-up" data-aos-delay="0">
+                <img src="https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=800" alt="Garderoba walk-in">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Garderoba</div>
+                    <h3 class="gallery-title">Garderoba Walk-in z O?wietleniem</h3>
+                    <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Krak車w, D?bniki, 2024</div>
+                </div>
+                <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+            </div>
+            
+            <div class="gallery-item" data-category="garderoby" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=800" alt="Szafa przesuwna">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Garderoba</div>
+                    <h3 class="gallery-title">Szafa Przesuwna D?b</h3>
+                    <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Wieliczka, 2023</div>
+                </div>
+                <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+            </div>
+            
+            <div class="gallery-item" data-category="garderoby" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=800" alt="Garderoba otwarta">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Garderoba</div>
+                    <h3 class="gallery-title">Garderoba Otwarta Industrial</h3>
+                    <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Krak車w, Stare Miasto, 2023</div>
+                </div>
+                <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+            </div>
+            
+            <!-- MEBLE -->
+            <div class="gallery-item" data-category="meble" data-aos="fade-up" data-aos-delay="0">
+                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800" alt="Komoda">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Meble</div>
+                    <h3 class="gallery-title">Komoda z Orzecha Ameryka里skiego</h3>
+                    <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Krak車w, Krowodrza, 2024</div>
+                </div>
+                <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+            </div>
+            
+            <div class="gallery-item" data-category="meble" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=800" alt="St車?">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Meble</div>
+                    <h3 class="gallery-title">St車? D?bowy 10-osobowy</h3>
+                    <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Zabierz車w, 2023</div>
+                </div>
+                <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+            </div>
+            
+            <!-- BIURA -->
+            <div class="gallery-item" data-category="biura" data-aos="fade-up" data-aos-delay="0">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800" alt="Biuro">
+                <div class="gallery-overlay">
+                    <div class="gallery-category">Biuro</div>
+                    <h3 class="gallery-title">Meble Biurowe Premium</h3>
+                    <div class="gallery-location"><i class="fas fa-map-marker-alt"></i> Krak車w, Biurowiec, 2024</div>
+                </div>
+                <div class="gallery-zoom"><i class="fas fa-search-plus"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Podoba Ci Si? Nasze Rzemios?o?</h2>
+        <p>Skontaktuj si? z nami i stw車rzmy razem co? wyj?tkowego</p>
+        <a href="wycena.html" class="btn"><i class="fas fa-calculator"></i> Bezp?atna Wycena</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Stolarstwo Premium Nowak | ul. Drzewna 12, 30-001 Krak車w | Tel: 512 345 678</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightbox-img">
+            <div class="lightbox-info">
+                <h3 id="lightbox-title"></h3>
+                <p id="lightbox-desc"></p>
+            </div>
+        </div>
+        <div class="lightbox-nav lightbox-prev" onclick="changeImage(-1)"><i class="fas fa-chevron-left"></i></div>
+        <div class="lightbox-nav lightbox-next" onclick="changeImage(1)"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+        
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                galleryItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.classList.remove('hidden');
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            item.classList.add('hidden');
+                        }, 300);
+                    }
+                });
+            });
+        });
+        
+        let currentImageIndex = 0;
+        const visibleItems = () => Array.from(galleryItems).filter(item => !item.classList.contains('hidden'));
+        
+        galleryItems.forEach((item) => {
+            item.addEventListener('click', () => {
+                const visible = visibleItems();
+                currentImageIndex = visible.indexOf(item);
+                openLightbox(item);
+            });
+        });
+        
+        function openLightbox(item) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            const title = document.getElementById('lightbox-title');
+            const desc = document.getElementById('lightbox-desc');
+            
+            img.src = item.querySelector('img').src;
+            title.textContent = item.querySelector('.gallery-title').textContent;
+            desc.textContent = item.querySelector('.gallery-location').textContent;
+            
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function changeImage(direction) {
+            const visible = visibleItems();
+            currentImageIndex += direction;
+            
+            if (currentImageIndex < 0) currentImageIndex = visible.length - 1;
+            if (currentImageIndex >= visible.length) currentImageIndex = 0;
+            
+            openLightbox(visible[currentImageIndex]);
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') changeImage(-1);
+            if (e.key === 'ArrowRight') changeImage(1);
+        });
+    </script>
+</body>
+</html>'''
+
+print("? REALIZACJE.HTML - Gotowy!")
+print("   ? 12 zdj?? w galerii (3 kuchnie, 3 schody, 3 garderoby, 2 meble, 1 biuro)")
+print("   ? Filtrowanie 6 kategorii")
+print("   ? Lightbox z nawigacj?")
+print("   ? Realne lokalizacje: Krak車w, Wieliczka, Skawina, Niepo?omice, Zabierz車w")
